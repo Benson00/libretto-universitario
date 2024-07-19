@@ -8,24 +8,10 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
+            background-color: #f4f7f6;
             color: #333;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -33,151 +19,48 @@
         h1 {
             font-size: 2.5em;
             color: #2c3e50;
-            margin-top: 0;
-            text-align: center;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #2c3e50;
+            margin-top: 20px;
         }
-        .data-summary {
-            width: 100%;
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #ecf0f1;
+        p {
+            font-size: 1.2em;
+            color: #34495e;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-top: 30px;
+        }
+        .chart-container {
+            width: 300px; /* Imposta una larghezza fissa */
+            height: 150px; /* Imposta un'altezza fissa */
+            margin: 20px;
+            background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        .data-summary p {
-            font-size: 1.5em;
-            margin: 10px 0;
-        }
-        .tab-selector {
-            margin: 20px;
-            text-align: center;
-        }
-        .tab-selector select {
-            padding: 12px;
-            font-size: 1.2em;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #ffffff;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
-        .chart-container,
-        .table-container {
-            width: 100%;
-            display: none;
+            padding: 10px;
         }
         .chart-container canvas {
             width: 100% !important;
-            height: 300px !important; /* Imposta l'altezza fissa per i grafici */
-        }
-        .table-container table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #2c3e50;
-            color: #ffffff;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #ddd;
-        }
-        .chart-title {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #2c3e50;
-            text-align: center;
-        }
-        footer {
-            width: 100%;
-            text-align: center;
-            padding: 10px;
-            background-color: #2c3e50;
-            color: #ffffff;
-            position: fixed;
-            bottom: 0;
-            box-sizing: border-box;
+            height: 100% !important;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Libretto Universitario</h1>
-        <div class="data-summary">
-            <p><strong>Media Ponderata:</strong> {{.MediaPonderata}}</p>
-            <p><strong>Voto inziale di Laurea:</strong> {{.VotoLaurea}}</p>
-        </div>
-
-        <div class="tab-selector">
-            <select id="viewSelector">
-                <option value="chart1">Andamento dei Voti</option>
-                <option value="chart2">Andamento dei Voti di Laurea</option>
-                <option value="table">Esami Svolti</option>
-            </select>
-        </div>
-
-        <div id="chart1" class="chart-container">
-            <div class="chart-title">Andamento dei Voti</div>
-            <canvas id="myChart"></canvas>
-        </div>
-
-        <div id="chart2" class="chart-container">
-            <div class="chart-title">Andamento dei Voti di Laurea</div>
-            <canvas id="votiChart"></canvas>
-        </div>
-
-        <div id="table" class="table-container">
-            <div class="chart-title">Esami Svolti</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Data</th>
-                        <th>Voto</th>
-                        <th>Crediti</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{range .Esami}}
-                    <tr>
-                        <td>{{.Nome}}</td>
-                        <td>{{.Data.Format "02/01/2006"}}</td>
-                        <td>{{.Voto}}</td>
-                        <td>{{.Crediti}}</td>
-                    </tr>
-                    {{end}}
-                </tbody>
-            </table>
-        </div>
+    <h1>Libretto Universitario</h1>
+    <p>Media Ponderata: {{.MediaPonderata}}</p>
+    <p>Voto di Laurea: {{.VotoLaurea}}</p>
+    
+    <h2>Andamento dei Voti</h2>
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
     </div>
-
-    <footer>
-        &copy; 2024 Libretto Universitario. Tutti i diritti riservati.
-    </footer>
-
+    
+    <h2>Andamento dei Voti di Laurea</h2>
+    <div class="chart-container">
+        <canvas id="votiChart"></canvas>
+    </div>
+    
     <script>
-        document.getElementById('viewSelector').addEventListener('change', function() {
-            const selectedView = this.value;
-            document.querySelectorAll('.chart-container, .table-container').forEach(container => {
-                container.style.display = 'none';
-            });
-            document.getElementById(selectedView).style.display = 'block';
-        });
-
         fetch('/data')
             .then(response => response.json())
             .then(data => {
