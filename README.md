@@ -60,6 +60,9 @@ L'applicazione è costruita con un backend Go e un frontend HTML, CSS con JavaSc
 - **`template.html`**: Template HTML per la visualizzazione dei dati e dei grafici.
 - **`README.md`**: Questo file di documentazione.
 
+## Sviluppo futuro 
+Possibilità di inserimento e rimozione degli esami direttamente dalla pagina web e salvataggio.
+
 ## Contributi
 
 Se desideri contribuire a questo progetto, apri una **issue** o invia una **pull request** con le tue modifiche e miglioramenti.
