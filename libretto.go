@@ -54,6 +54,8 @@ func main() {
 	libretto.AggiungiEsame(Esame{"Fisica", time.Date(2022, time.March, 20, 0, 0, 0, 0, time.UTC), 26, 6})
 	libretto.AggiungiEsame(Esame{"Fisica", time.Date(2022, time.March, 20, 0, 0, 0, 0, time.UTC), 18, 6})
 
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+
 	http.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(libretto); err != nil {
