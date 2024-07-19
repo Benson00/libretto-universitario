@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Libretto Universitario</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Libretto Universitario</h1>
+    <p>Media Ponderata: {{.MediaPonderata}}</p>
+    <p>Voto di Laurea: {{.VotoLaurea}}</p>
+    
+    <canvas id="myChart" width="400" height="200"></canvas>
+    
+    <script>
+        fetch('/data')
+            .then(response => response.json())
+            .then(data => {
+                const labels = data.Esami.map(esame => esame.Nome);
+                const voti = data.Esami.map(esame => esame.Voto);
+                
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Voti',
+                            data: voti,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 18,
+                                max: 30
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+</body>
+</html>

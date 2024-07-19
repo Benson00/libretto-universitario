@@ -1,8 +1,10 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
+	"net/http"
 	"sort"
+	"text/template"
 	"time"
 )
 
@@ -44,6 +46,21 @@ func main() {
 	libretto.AggiungiEsame(Esame{"Matematica", time.Date(2022, time.January, 15, 0, 0, 0, 0, time.UTC), 28, 6})
 	libretto.AggiungiEsame(Esame{"Fisica", time.Date(2022, time.March, 20, 0, 0, 0, 0, time.UTC), 30, 6})
 
-	fmt.Println("Media Ponderata:", libretto.MediaPonderata())
-	fmt.Println("Voto di entrata alla Laurea:", libretto.VotoLaurea())
+	http.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(libretto)
+	})
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		tmpl := template.Must(template.ParseFiles("template.html"))
+		tmpl.Execute(w, struct {
+			MediaPonderata float64
+			VotoLaurea     float64
+		}{
+			MediaPonderata: libretto.MediaPonderata(),
+			VotoLaurea:     libretto.VotoLaurea(),
+		})
+	})
+
+	http.ListenAndServe(":8080", nil)
 }
