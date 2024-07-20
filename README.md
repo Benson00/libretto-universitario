@@ -54,23 +54,6 @@ L'applicazione è costruita con un backend Go e un frontend HTML, CSS con JavaSc
   - **Andamento dei Voti di Laurea**: Mostra un grafico lineare con l'andamento del voto di laurea calcolato sulla base degli esami sostenuti.
   - **Esami Svolti**: Mostra una tabella dettagliata con i nomi degli esami, le date, i voti e i crediti.
 
-## Struttura del Progetto
-
-- **`main.go`**: File principale che contiene il server Go e la logica di backend.
-- **`template.html`**: Template HTML per la visualizzazione dei dati e dei grafici.
-- **`README.md`**: Questo file di documentazione.
-
-## Sviluppo futuro 
-Possibilità di inserimento e rimozione degli esami direttamente dalla pagina web e salvataggio.
-
-## Contributi
-
-Se desideri contribuire a questo progetto, apri una **issue** o invia una **pull request** con le tue modifiche e miglioramenti.
-
-## Licenza
-
-Questo progetto è concesso in licenza sotto la [Licenza MIT](https://opensource.org/licenses/MIT). Vedi il file [LICENSE](LICENSE) per i dettagli.
-
 ---
 
 Grazie per aver visitato il progetto! 🎉
