@@ -19,31 +19,8 @@ L'applicazione è costruita con un backend Go e un frontend HTML, CSS con JavaSc
 - **Frontend**: HTML, CSS, JavaScript
 - **Grafici**: Chart.js
 
-## Installazione e Configurazione
 
-### Prerequisiti
-
-- [Go](https://golang.org/dl/) (versione 1.18 o superiore)
-- Un browser web moderno
-
-### Passaggi per l'installazione
-
-1. **Clona il repository**
-
-    ```bash
-    git clone https://github.com/tuo-username/libretto-universitario.git
-    cd libretto-universitario
-    ```
-
-2. **Compila ed esegui il server Go**
-
-    Assicurati di avere Go installato e configurato correttamente. Poi, inserisci gli esami nel file go ed esegui il seguente comando per avviare il server:
-
-    ```bash
-    go run main.go
-    ```
-
-3. **Accedi all'applicazione**
+ **Accedi all'applicazione**
 
     Apri il browser e vai all'indirizzo [http://localhost:8080](http://localhost:8080). Dovresti vedere l'applicazione in esecuzione con la possibilità di visualizzare i grafici e la tabella degli esami.
 
